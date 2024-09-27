@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Formulário</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='criar_formulario.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="formulario-container">
+        <h1>Criar Novo Formulário</h1>
+        <form action="" method="POST">
+            <div class="form-titulo">
+                <label for="titulo">Título:</label>
+                <input type="text" name="titulo" id="titulo" placeholder="Digite o título do formulário" required maxlength="200">
+                <p id="erro-titulo" style="color: red; display: none;">O título não pode ter mais de 200 caracteres.</p>
+            </div>
+
+            <div class="form-descricao">
+                <label for="descricao">Descrição:</label>
+                <textarea name="descricao" id="descricao" placeholder="Digite a descrição do formulário"></textarea>
+            </div>
+
+            <h2>Perguntas</h2>
+            <div id="perguntas-container">
+                <div class="pergunta">
+                    <label for="texto_pergunta">Pergunta:</label>
+                    <input type="text" name="texto_pergunta[]" placeholder="Digite sua pergunta" required>
+                    
+                    <label for="tipo_pergunta">Tipo de Resposta:</label>
+                    <select name="tipo_pergunta[]" onchange="atualizarOpcoes(this, 0)">
+                        <option value="curta">Resposta Curta</option>
+                        <option value="longa">Resposta Longa</option>
+                        <option value="multipla">Múltipla Escolha</option>
+                        <option value="caixa">Caixa de Seleção</option>
+                    </select>
+            
+                    <div class="opcoes-container" id="opcoes_0" style="display: none;">
+                        <div class="opcao">
+                            <input type="text" name="opcoes_0[]" placeholder="Digite uma opção">
+                            <button type="button" onclick="removerOpcao(this)">Remover Opção</button>
+                        </div>
+                        <button type="button" onclick="adicionarOpcao(this, 0)">Adicionar Opção</button>
+                    </div>
+            
+                    <button type="button" onclick="removerPergunta(this)">Remover Pergunta</button>
+                </div>
+            </div>
+
+            <button type="button" id="botao-adicionar-pergunta">Adicionar Pergunta</button>
+
+            <button type="submit" class="submit-btn">Criar Formulário</button>
+        </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='validacao.js') }}"></script>
+    <script src="{{ url_for('static', filename='perguntas.js') }}"></script>
+
+</body>
+</html>

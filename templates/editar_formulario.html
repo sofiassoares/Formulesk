@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Formulário</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='editar_formulario.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="formulario-container">
+        <h1>Editar Formulário</h1>
+        <form id="editar-form" action="{{ url_for('editar_formulario', formulario_id=formulario.id) }}" method="POST">
+            <div class="form-titulo">
+                <label for="titulo">Título do Formulário</label>
+                <input type="text" name="titulo" id="titulo" value="{{ formulario.titulo }}" required>
+            </div>
+
+            <div class="form-descricao">
+                <label for="descricao">Descrição</label>
+                <textarea name="descricao" id="descricao">{{ formulario.descricao }}</textarea>
+            </div>
+
+            <h2>Perguntas</h2>
+            <div id="perguntas-container">
+                {% for pergunta in formulario.perguntas %}
+                    <div class="pergunta" data-id="{{ pergunta.id }}">
+                        <input type="hidden" name="question_ids[]" value="{{ pergunta.id }}">
+                        <label>Pergunta:</label>
+                        <input type="text" name="texto_pergunta[]" value="{{ pergunta.texto_pergunta }}" required>
+
+                        <label>Tipo de Resposta:</label>
+                        <select name="tipo_pergunta[]" onchange="toggleOptions(this)">
+                            <option value="curta" {% if pergunta.tipo_pergunta == 'curta' %} selected {% endif %}>Resposta Curta</option>
+                            <option value="longa" {% if pergunta.tipo_pergunta == 'longa' %} selected {% endif %}>Resposta Longa</option>
+                            <option value="multipla" {% if pergunta.tipo_pergunta == 'multipla' %} selected {% endif %}>Múltipla Escolha</option>
+                            <option value="caixa" {% if pergunta.tipo_pergunta == 'caixa' %} selected {% endif %}>Caixa de Seleção</option>
+                        </select>
+
+                        <div class="opcoes-container" style="display: {% if pergunta.tipo_pergunta in ['multipla', 'caixa'] %}block{% else %}none{% endif %};">
+                            <h4>Opções</h4>
+                            {% for opcao in pergunta.opcoes %}
+                                <div class="opcao" data-id="{{ opcao.id }}">
+                                    <input type="text" name="opcoes_{{ pergunta.id }}[]" value="{{ opcao.texto_opcao }}" required>
+                                    <button type="button" class="remove-option">Remover Opção</button>
+                                </div>
+                            {% endfor %}
+                            <button type="button" class="add-opcao">Adicionar Opção</button>
+                        </div>
+                        <button type="button" class="remover-pergunta">Remover Pergunta</button>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <button type="button" id="add-pergunta">Adicionar Pergunta</button>
+            <button type="submit" class="submit-btn">Salvar Alterações</button>
+        </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='/editar_formulario.js') }}"></script>
+</body>
+</html>

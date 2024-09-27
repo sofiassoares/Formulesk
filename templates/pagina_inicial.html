@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulários</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='inicio.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Formulesk</h1>
+        </div>
+
+        <div class="novo-form-seccao">
+            <h2>Iniciar um novo formulário</h2>
+            <a href="{{ url_for('criar_formulario') }}" class="btn-novo-formulario">
+                <img src="{{ url_for('static', filename='icone_formulario.png') }}">
+                Novo Formulário
+            </a>
+        </div>
+
+        <div class="forms-recentes-seccao">
+            <h2>Formulários recentes</h2>
+            <div class="forms-recentes-grid">
+                {% for formulario in formularios %}
+                    <div class="form-card">
+                        <div class="form-card-content">
+                            <h3>{{ formulario.titulo }}</h3>
+                            <p>{{ formulario.descricao[:100] }}...</p>
+                        </div>
+                        <div class="form-card-footer">
+                            <div class="form-actions">
+                                <a href="{{ url_for('visualizar_formulario', formulario_id=formulario.id) }}" class="view-btn">Abrir</a>
+                                <a href="{{ url_for('editar_formulario', formulario_id=formulario.id) }}" class="edit-btn">Editar</a>
+                                <form action="{{ url_for('excluir_formulario', formulario_id=formulario.id) }}" method="POST" onsubmit="return confirmDelete()">
+                                    <button type="submit" class="deletar-btn">Excluir</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

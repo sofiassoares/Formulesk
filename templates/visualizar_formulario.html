@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='visualizar_formulario.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Visualizar Formulário</title>
+</head>
+<body>
+    <div class="formulario-container">
+        <h1>{{ formulario.titulo }}</h1>
+        <p>{{ formulario.descricao }}</p>
+        <h2>Perguntas</h2>
+        <div id="perguntas-container">
+            {% if formulario.perguntas %}
+                {% for pergunta in formulario.perguntas %}
+                    <div class="pergunta">
+                        <div class="pergunta-meta">
+                            <p><strong>Tipo de Pergunta:</strong> {{ pergunta.tipo_pergunta }}</p>
+                        </div>
+
+                        <div class="pergunta-content">
+                            <h3>{{ pergunta.texto_pergunta }}</h3>
+
+                            {% if pergunta.tipo_pergunta == 'multipla' %}
+                                <ul>
+                                    {% for opcao in pergunta.opcoes %}
+                                        <li>
+                                            <label>
+                                                <input type="radio" disabled> {{ opcao.texto_opcao }}
+                                            </label>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% elif pergunta.tipo_pergunta == 'caixa' %}
+                                <ul>
+                                    {% for opcao in pergunta.opcoes %}
+                                        <li>
+                                            <label>
+                                                <input type="checkbox" disabled> {{ opcao.texto_opcao }}
+                                            </label>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p>As respostas aparecerão aqui</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Nenhuma pergunta encontrada para este formulário.</p>
+            {% endif %}
+        </div>
+
+        <a href="{{ url_for('index') }}" class="btn">Voltar à Página Inicial</a>
+    </div>
+</body>
+</html>

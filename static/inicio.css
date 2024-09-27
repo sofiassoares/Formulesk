@@ -1,0 +1,180 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: hsla(356, 68%, 91%, 1);
+    background: linear-gradient(0deg, hsla(356, 68%, 91%, 1) 24%, hsla(140, 60%, 82%, 1) 100%);
+    background: -moz-linear-gradient(0deg, hsla(356, 68%, 91%, 1) 24%, hsla(140, 60%, 82%, 1) 100%);
+    background: -webkit-linear-gradient(0deg, hsla(356, 68%, 91%, 1) 24%, hsla(140, 60%, 82%, 1) 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#F8DADC", endColorstr="#B6EDC8", GradientType=1 );
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #333;
+}
+
+.novo-form-seccao {
+    margin-bottom: 40px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.novo-form-seccao h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.btn-novo-formulario {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    text-align: center;
+    background: linear-gradient(90deg, #0066b2 0%, #00c6ff 100%);
+    width: fit-content;
+}
+
+.btn-novo-formulario:hover {
+    background-color: #1668c1;
+}
+
+.btn-novo-formulario img {
+    margin-right: 10px;
+    width: 24px;
+    height: 24px;
+}
+
+.forms-recentes-seccao {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.forms-recentes-seccao h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.forms-recentes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.form-card {
+    background: linear-gradient(135deg, #d6ebfb 10%, #e992ff 100%);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.form-card:hover {
+    transform: translateY(-5px);
+}
+
+.form-card-content h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.form-card-content p {
+    font-size: 1rem;
+    color: #3d3b3b;
+}
+
+.form-card-footer {
+    margin-top: 20px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-actions a, .form-actions button {
+    background-color: #1e88e5;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+}
+
+.form-actions a:hover, .form-actions button:hover {
+    background-color: #1565c0;
+}
+
+.form-actions .view-btn {
+    background-color: #34a853;
+}
+
+.form-actions .view-btn:hover {
+    background-color: #2c8b42;
+}
+
+.form-actions .deletar-btn {
+    background-color: #e53935;
+}
+
+.form-actions .deletar-btn:hover {
+    background-color: #b71c1c;
+}
+
+@media (max-width: 768px) {
+    .forms-recentes-grid {
+        grid-template-columns: 1fr;
+    }
+}
